@@ -1,0 +1,64 @@
+version: '3.8'
+
+services:
+  gitea:
+    image: gitea/gitea:${GITEA_VERSION:-1.21-rootless}
+    container_name: gitea
+    environment:
+      - USER_UID=${USER_UID:-1000}
+      - USER_GID=${USER_GID:-1000}
+      - GITEA__database__DB_TYPE=postgres
+      - GITEA__database__HOST=gitea-db:5432
+      - GITEA__database__NAME=${POSTGRES_DB:-gitea}
+      - GITEA__database__USER=${POSTGRES_USER:-gitea}
+      - GITEA__database__PASSWD=${POSTGRES_PASSWORD:-gitea}
+      - GITEA__server__DOMAIN=${GITEA_DOMAIN:-localhost}
+      - GITEA__server__HTTP_PORT=${GITEA_HTTP_PORT:-3000}
+      - GITEA__server__ROOT_URL=${GITEA_ROOT_URL:-http://localhost:3000/}
+      - GITEA__server__SSH_DOMAIN=${GITEA_SSH_DOMAIN:-localhost}
+      - GITEA__server__SSH_PORT=${GITEA_SSH_PORT:-2222}
+    restart: unless-stopped
+    networks:
+      - gitea-network
+    volumes:
+      - gitea-data:/var/lib/gitea
+      - gitea-config:/etc/gitea
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "${GITEA_HTTP_PORT:-3000}:3000"
+      - "${GITEA_SSH_PORT:-2222}:2222"
+    depends_on:
+      - gitea-db
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:3000/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  gitea-db:
+    image: postgres:${POSTGRES_VERSION:-15-alpine}
+    container_name: gitea-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER:-gitea}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-gitea}
+      - POSTGRES_DB=${POSTGRES_DB:-gitea}
+    networks:
+      - gitea-network
+    volumes:
+      - gitea-db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-gitea}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  gitea-network:
+    driver: bridge
+
+volumes:
+  gitea-data:
+  gitea-config:
+  gitea-db-data:

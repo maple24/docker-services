@@ -1,0 +1,87 @@
+# .dockerignore
+# Template file for Docker builds
+# Copy this to service directories when building custom images
+
+# Version control
+.git
+.gitignore
+.gitattributes
+
+# CI/CD
+.github
+.gitlab-ci.yml
+.travis.yml
+Jenkinsfile
+
+# Documentation
+README.md
+CHANGELOG.md
+LICENSE
+*.md
+
+# Docker files
+docker-compose*.yml
+Dockerfile*
+.dockerignore
+
+# Environment files
+.env
+.env.*
+*.env
+
+# Logs
+logs/
+*.log
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.iml
+.project
+.classpath
+.settings/
+
+# Dependencies (rebuild in image)
+node_modules/
+bower_components/
+vendor/
+venv/
+env/
+
+# Build artifacts
+dist/
+build/
+target/
+*.egg-info/
+
+# Test files
+test/
+tests/
+*.test.js
+*.spec.js
+__tests__/
+coverage/
+
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Secrets
+*.key
+*.pem
+*.crt
+*.p12
+secrets/
