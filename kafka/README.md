@@ -213,6 +213,15 @@ For production deployments, consider:
 - Separating broker and controller roles for large clusters
 - Implementing proper backup strategies
 
+## 📚 Examples
+
+Check out the `examples/` directory for practical usage examples:
+
+- **Python**: Producer and consumer examples using `kafka-python`
+  - `examples/python/producer.py` - Send messages to Kafka
+  - `examples/python/consumer.py` - Consume messages from Kafka
+  - See `examples/python/README.md` for detailed instructions
+
 ## 🔗 Additional Resources
 
 - [Apache Kafka Documentation](https://kafka.apache.org/documentation/)
