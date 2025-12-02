@@ -11,6 +11,7 @@ services:
   kafka:
     image: confluentinc/cp-kafka:7.6.0
     container_name: kafka-broker
+    user: root
     ports:
       - "9092:9092"
       - "9093:9093"
