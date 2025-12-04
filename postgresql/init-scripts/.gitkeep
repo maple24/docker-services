@@ -1,0 +1,23 @@
+# PostgreSQL Initialization Scripts
+# 
+# These SQL scripts run automatically on first container start
+# Execution order: alphabetical (01, 02, 03, ...)
+#
+# Current scripts:
+# 01-create-databases.sql          - Creates application databases
+# 02-create-extensions.sql         - Installs PostgreSQL extensions (UUID, pgcrypto, pg_trgm)
+# 03-create-tables.sql             - Creates all application tables
+# 04-create-indexes.sql            - Adds performance indexes
+# 05-create-functions-triggers.sql - Database functions and triggers
+# 06-insert-sample-data.sql        - Inserts sample data and creates views
+# 07-create-users-permissions.sql  - Creates application users with appropriate permissions
+#
+# To add custom scripts:
+# - Name them with numeric prefix (e.g., 08-my-script.sql)
+# - Use \c database_name to switch databases
+# - Scripts run as postgres superuser
+#
+# Default credentials created:
+# - admin user: admin / admin123 (⚠️ CHANGE THIS!)
+# - app_user: app_password (⚠️ CHANGE THIS!)
+# - readonly_user: readonly_password (⚠️ CHANGE THIS!)

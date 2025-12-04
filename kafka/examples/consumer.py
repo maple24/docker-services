@@ -17,7 +17,7 @@ def signal_handler(sig, frame):
     print("\n\nShutting down consumer...")
     running = False
 
-def create_consumer(topic, bootstrap_servers='localhost:9092', group_id='python-consumer-group'):
+def create_consumer(topic, bootstrap_servers='10.190.164.244:9092', group_id='python-consumer-group'):
     """Create and return a Kafka consumer instance"""
     consumer = KafkaConsumer(
         topic,

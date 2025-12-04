@@ -8,7 +8,7 @@ import json
 import time
 from datetime import datetime
 
-def create_producer(bootstrap_servers='localhost:9092'):
+def create_producer(bootstrap_servers='10.190.164.244:9092'):
     """Create and return a Kafka producer instance"""
     producer = KafkaProducer(
         bootstrap_servers=bootstrap_servers,
